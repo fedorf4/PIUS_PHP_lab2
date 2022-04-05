@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Address;
+use App\Models\Customer;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class count_addresses extends Command
 {
@@ -29,7 +30,11 @@ class count_addresses extends Command
     public function handle()
     {
         $id = $this->argument('id');
-        $count = DB::table('addresses')->where('customer_id', $id)->count();
+        if (!Customer::find($id)) {
+            $this->error('This customer does not exist!');
+            return 1;
+        }
+        $count = Address::where('customer_id', $id)->count();
         $this->info('This customer has ' . $count . ' addresses');
         return 0;
     }

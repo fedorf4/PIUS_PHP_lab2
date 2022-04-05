@@ -16,7 +16,7 @@
     <form action="/customers" id="allcustomersfilter" method="GET">
         <div class="form-control">
             <label for="emailfilter" class="form__label">Is blocked:</label>
-            <select name="is_blocked" selected={{$request->get('is_blocked')}}>
+            <select name="is_blocked" selected={{$request->is_blocked}}>
                 <option value="">----</option>
                 <option value="true">true</option>
                 <option value="false">false</option>
@@ -28,7 +28,7 @@
         </div>
         <div class="form-control">
             <label for="phonefilter" class="form__label">Phone:</label>
-            <input type="text" id="phonefilter" name="phonefilter" value={{$request->get('phonefilter')}}> </input>
+            <input type="text" id="phonefilter" name="phonefilter" value={{$request->phonefilter}}> </input>
         </div>
         <div class="form-control">
             <label for="namefilter" class="form__label">Name:</label>
@@ -57,16 +57,9 @@
                 </tr>
             @endforeach
         </table>
-        <!--{{$customers->links()}}!--> 
+        {{$customers->links()}}
         @endif
-        @if($page>1)
-        <a href="/customers?page={{$page-1}}{{$stringrequest}}">prevpage</a>
-        @endif
-        {{$page}}
-        @if(20<=count($customers))
-        <a href="/customers?page={{$page+1}}{{$stringrequest}}">nextpage</a>
-        @endif
-    </div>
+     </div>
 </body>
 
 </html>
