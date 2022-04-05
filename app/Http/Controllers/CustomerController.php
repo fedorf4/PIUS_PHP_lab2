@@ -19,7 +19,6 @@ class CustomerController extends Controller
                 $query->where('name', 'LIKE', '%' . $request->get('namefilter') . '%')
                     ->orWhere('surname', 'LIKE', '%' . $request->get('namefilter') . '%');
             });
-
         $customers = $customers->paginate(20)->withQueryString();
         return view('allCustomersAllFields', ['customers' => $customers, 'request' => $request]);
     }

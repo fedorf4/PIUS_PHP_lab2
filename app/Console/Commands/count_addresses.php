@@ -31,7 +31,7 @@ class count_addresses extends Command
     {
         $id = $this->argument('id');
         if (!Customer::find($id)) {
-            $this->error('This customer does not exist!');
+            $this->error('This customer doesnt exist!');
             return 1;
         }
         $count = Address::where('customer_id', $id)->count();
