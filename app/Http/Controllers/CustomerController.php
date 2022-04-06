@@ -9,7 +9,7 @@ class CustomerController extends Controller
 {
     public function showCustomersFiltered(Request $request)
     {
-        $customers = Customer::where('email', 'LIKE', '%' . $request->get('emailfilter'));
+        $customers = Customer::where('email', 'LIKE', '%' . $request->get('emailfilter') . '%');
         if ($request->get('is_blocked'))
             $customers = $customers->where('is_blocked', $request->get('is_blocked'));
         if ($request->get('phonefilter'))
