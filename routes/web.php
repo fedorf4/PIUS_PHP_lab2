@@ -17,7 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/customers', [CustomerController::class, 'showCustomersFiltered']);
-
-Route::get('/customers/{id}', [CustomerController::class, 'showCertainCustomerAndAdresses']);
