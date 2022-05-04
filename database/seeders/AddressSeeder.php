@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Address;
+use App\Domain\Addresses\Models\Address;
 
 class AddressSeeder extends Seeder
 {

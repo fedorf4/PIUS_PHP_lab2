@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace App\Domain\Addresses\Models\Factories;
 
-use App\Models\Customer;
+use App\Domain\Addresses\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AddressFactory extends Factory
 {
+    protected $model = Address::class;
     /**
      * Define the model's default state.
      *
@@ -22,10 +23,7 @@ class AddressFactory extends Factory
             'city' => $this->faker->city(),
             'street_or_district' => $this->faker->streetName(),
             'house_number' => $this->faker->buildingNumber(),
-            'floor' => $this->faker->randomNumber(2, false),
             'flat_number' => $this->faker->randomNumber(3, false),
-            'intercom_code' => $this->faker->numerify('B###B##'),
-            'customer_id' => Customer::all()->random()->id
         ];
     }
 }

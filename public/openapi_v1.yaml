@@ -1,0 +1,349 @@
+openapi: 3.0.0
+info:
+  title: Swagger Addresses
+  description: Educational project API
+  version: 1.0.0
+servers:
+  - url: http://u8191056-lab2.local/api/v1
+paths:
+  /addresses:
+    post:
+      tags:
+        - addresses
+      summary: Create a new address
+      operationId: create_address
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name_from_customer:
+                  type: string
+                  example: home
+                city:
+                  type: string
+                  example: New York
+                street_or_district:
+                  type: string
+                  example: Brighton beach
+                house_number:
+                  type: integer
+                  example: 12
+                flat_number:
+                  type: integer
+                  example: 10
+      responses:
+        "201":
+          description: Created successfull
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /addresses/{address_id}:
+    get:
+      tags:
+        - addresses
+      summary: Info for a specific address
+      operationId: show_address_by_id
+      parameters:
+        - name: address_id
+          in: path
+          required: true
+          description: The id of the address to retrieve
+          schema:
+            type: integer
+            example: 10
+        - name: include
+          in: query
+          required: false
+          description: Add related values from the table
+          schema:
+            type: string
+            example: customers
+      responses:
+        "200":
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name_from_customer:
+                    type: string
+                  city:
+                    type: string
+                  street_or_district:
+                    type: string
+                  house_number:
+                    type: integer
+                  flat_number:
+                    type: integer
+                  customers:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Customer"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - addresses
+      summary: Update all fields for a specific address
+      operationId: update_address_by_id
+      parameters:
+        - name: address_id
+          in: path
+          required: true
+          description: The id of the address to retrieve
+          schema:
+            type: integer
+            example: 10
+      requestBody:
+        description: Fields to update
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - name_from_customer
+                - city
+                - street_or_district
+                - house_number
+                - flat_number
+              properties:
+                name_from_customer:
+                  type: string
+                  example: home
+                city:
+                  type: string
+                  example: New York
+                street_or_district:
+                  type: string
+                  example: Brighton beach
+                house_number:
+                  type: integer
+                  example: 12
+                flat_number:
+                  type: integer
+                  example: 10
+      responses:
+        "200":
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      tags:
+        - addresses
+      summary: Update selected fields for a specific address
+      operationId: update_address_fields_by_id
+      parameters:
+        - name: address_id
+          in: path
+          required: true
+          description: The id of the address to retrieve
+          schema:
+            type: integer
+            example: 10
+      requestBody:
+        description: Fields to update
+        content:
+          "application/json":
+            schema:
+              type: object
+              properties:
+                name_from_customer:
+                  type: string
+                  example: home
+                city:
+                  type: string
+                  example: New York
+                street_or_district:
+                  type: string
+                  example: Brighton beach
+                house_number:
+                  type: integer
+                  example: 12
+                flat_number:
+                  type: integer
+                  example: 10
+      responses:
+        "200":
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Address"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - addresses
+      summary: Delete a specific address
+      operationId: delete_address_by_id
+      parameters:
+        - name: address_id
+          in: path
+          required: true
+          description: The id of the address to delete
+          schema:
+            type: integer
+            example: 10
+      responses:
+        "200":
+          description: Successfully done
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    nullable: true
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Address:
+      type: object
+      required:
+        - id
+        - name_from_customer
+        - city
+        - street_or_district
+        - house_number
+        - flat_number
+      properties:
+        id:
+          type: integer
+        name_from_customer:
+          type: string
+        city:
+          type: string
+        street_or_district:
+          type: string
+        house_number:
+          type: integer
+        flat_number:
+          type: integer
+    Customer:
+      type: object
+      required:
+        - id
+        - name
+        - surname
+        - phone
+        - email
+        - created_at
+        - updated_at
+        - address_id
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        surname:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        address_id:
+          type: integer
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string

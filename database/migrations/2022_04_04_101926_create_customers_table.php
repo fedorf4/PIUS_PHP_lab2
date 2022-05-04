@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_blocked');
             $table->string('surname');
             $table->string('phone');
             $table->string('email');
             $table->timestamps();
+            $table->foreignId('address_id')->constrained()->onDelete('cascade');
         });
     }
 

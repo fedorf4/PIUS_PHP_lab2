@@ -19,11 +19,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('street_or_district');
             $table->integer('house_number');
-            $table->integer('floor')->nullable();
             $table->integer('flat_number');
-            $table->string('intercom_code')->nullable();
-            $table->foreignId('customer_id')->constrained();
-            $table->timestamps();
         });
     }
 
