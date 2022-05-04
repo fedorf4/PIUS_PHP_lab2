@@ -12,6 +12,7 @@ class CustomerResource extends BaseJsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'surname' => $this->surname,
             'phone' => $this->phone,

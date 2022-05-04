@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ReplaceAddressRequest extends BaseFormRequest
 {
@@ -22,15 +23,9 @@ class ReplaceAddressRequest extends BaseFormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator)
+    /*protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
-
-        $response = response()->json([
-            'code' => 'InvalidInputException',
-            'message' => 'Invalid data send',
-            'meta' => $errors->messages(),
-        ], JsonResponse::HTTP_BAD_REQUEST);
-        throw new HttpResponseException($response);
-    }
+        throw new  HttpException(400, implode($errors->getMessages()));
+    }*/
 }
