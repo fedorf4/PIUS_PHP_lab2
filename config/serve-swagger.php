@@ -5,7 +5,7 @@ return [
 
     'urls' => [
         [
-            'url' => "openapi_v1.yaml",
+            'url' => "openapiV1.yaml",
             'name' => 'my_openapi',
         ],
     ],

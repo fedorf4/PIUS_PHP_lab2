@@ -74,29 +74,29 @@ class Handler extends ExceptionHandler
         }
 
         if (array_key_exists($statusCode, $this->errorsCodes))
-            $errors['code'] = $this->errorsCodes[$statusCode];
+            $error['code'] = $this->errorsCodes[$statusCode];
 
         switch ($statusCode) {
             case 400:
-                $errors['message'] = 'Something wrong in send data. Check and try again.';
+                $error['message'] = 'Something wrong in send data. Check and try again.';
                 break;
             case 404:
-                $errors['message'] = 'The requested resource was not found';
+                $error['message'] = 'The requested resource was not found';
                 break;
             case 422:
-                $errors['message'] = json_decode($exception->getContent())->errors;
+                $error['message'] = json_decode($exception->getContent())->message;
                 $statusCode = 400;
                 break;
             case 500:
-                $errors['message'] = 'Something went wrong. Please try again later.';
+                $error['message'] = 'Something went wrong. Please try again later.';
                 break;
             default:
-                $errors['message'] = 'Unexpected exception - ' . $exception->getContent();
+                $error['message'] = 'Unexpected exception - ' . $exception->getContent();
                 break;
         }
 
         $response['data'] = null;
-        $response['errors'] = $errors;
+        $response['errors'] = [$error];
         return response()->json($response, $statusCode);
     }
 }
