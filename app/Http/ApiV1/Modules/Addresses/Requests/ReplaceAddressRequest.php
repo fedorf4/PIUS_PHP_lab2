@@ -22,10 +22,4 @@ class ReplaceAddressRequest extends BaseFormRequest
             'flat_number' => ['required', 'integer'],
         ];
     }
-
-    /*protected function failedValidation(Validator $validator)
-    {
-        $errors = $validator->errors();
-        throw new  HttpException(400, implode($errors->getMessages()));
-    }*/
 }

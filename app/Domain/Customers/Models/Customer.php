@@ -11,7 +11,7 @@ class Customer extends Model
 {
     use HasFactory;
 
-    public static function factory()
+    public static function factory(): CustomerFactory
     {
         return CustomerFactory::new();
     }

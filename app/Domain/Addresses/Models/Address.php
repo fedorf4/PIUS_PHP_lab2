@@ -12,7 +12,7 @@ class Address extends Model
 {
     use HasFactory;
 
-    public static function factory()
+    public static function factory(): AddressFactory
     {
         return AddressFactory::new();
     }

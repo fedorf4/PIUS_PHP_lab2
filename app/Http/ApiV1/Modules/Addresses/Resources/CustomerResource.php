@@ -9,7 +9,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 /** @mixin \App\Domain\Addresses\Models\Address */
 class CustomerResource extends BaseJsonResource
 {
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,

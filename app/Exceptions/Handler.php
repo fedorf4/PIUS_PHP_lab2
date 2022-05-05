@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,12 +47,12 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $exception): JsonResponse
     {
         return $this->handleApiException($request, $exception);
     }
 
-    private function handleApiException($request, Throwable $exception)
+    private function handleApiException($request, Throwable $exception): JsonResponse
     {
         $exception = $this->prepareException($exception);
 
@@ -65,7 +66,7 @@ class Handler extends ExceptionHandler
         return $this->customApiResponse($exception);
     }
 
-    public function customApiResponse($exception)
+    public function customApiResponse($exception): JsonResponse
     {
         if (method_exists($exception, 'getStatusCode')) {
             $statusCode = $exception->getStatusCode();

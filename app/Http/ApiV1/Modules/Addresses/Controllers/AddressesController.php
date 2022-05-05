@@ -7,9 +7,11 @@ use App\Domain\Addresses\Actions\DeleteAddressAction;
 use App\Domain\Addresses\Actions\GetAddressAction;
 use App\Domain\Addresses\Actions\PatchAddressAction;
 use App\Domain\Addresses\Actions\ReplaceAddressAction;
+
 use App\Http\ApiV1\Modules\Addresses\Requests\CreateAddressRequest;
 use App\Http\ApiV1\Modules\Addresses\Requests\PatchAddressRequest;
 use App\Http\ApiV1\Modules\Addresses\Requests\ReplaceAddressRequest;
+
 use App\Http\ApiV1\Modules\Addresses\Resources\AddressResource;
 use App\Http\ApiV1\Support\Resources\EmptyResource;
 use Illuminate\Http\Request;
@@ -31,13 +33,13 @@ class AddressesController
         return new AddressResource($action->execute($addressId, $request->validated()));
     }
 
-    public function delete(int $addressId, DeleteAddressAction $action)
+    public function delete(int $addressId, DeleteAddressAction $action): EmptyResource
     {
         $action->execute($addressId);
         return new EmptyResource();
     }
 
-    public function get(int $addressId, GetAddressAction $action, Request $request)
+    public function get(int $addressId, GetAddressAction $action, Request $request): AddressResource
     {
         return new AddressResource($action->execute($addressId, $request));
     }

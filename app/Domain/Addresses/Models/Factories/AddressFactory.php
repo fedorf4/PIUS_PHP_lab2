@@ -16,7 +16,7 @@ class AddressFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'name_from_customer' => $this->faker->word(),
